@@ -825,6 +825,204 @@
             margin-bottom: 14px;
         }
 
+        .progress-bar.hidden {
+            display: none;
+        }
+
+        /* ══════════════════════════════════════════
+   LANDING PAGE (step 0)
+══════════════════════════════════════════ */
+        .landing-screen {
+            display: none;
+        }
+
+        .landing-screen.active {
+            display: block;
+        }
+
+        .landing-hero {
+            background: var(--moss);
+            padding: 28px 20px 24px;
+            text-align: center;
+        }
+
+        .landing-hero img {
+            width: 100%;
+            max-width: 560px;
+            border-radius: var(--radius);
+            display: block;
+            margin: 0 auto 20px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+        }
+
+        .landing-hero-title {
+            font-family: var(--serif);
+            font-size: 22px;
+            font-weight: 700;
+            color: #fff;
+            line-height: 1.35;
+            margin-bottom: 6px;
+        }
+
+        .landing-hero-sub {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.75);
+            margin-bottom: 16px;
+        }
+
+        .landing-pills {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+
+        .landing-pill {
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 5px 12px;
+            font-size: 11.5px;
+            color: rgba(255, 255, 255, 0.9);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .landing-pill strong {
+            color: #ffd280;
+        }
+
+        .btn-register {
+            display: block;
+            width: 100%;
+            max-width: 360px;
+            margin: 0 auto;
+            padding: 15px 28px;
+            background: #fff;
+            color: var(--moss);
+            font-family: var(--font);
+            font-size: 16px;
+            font-weight: 700;
+            border: none;
+            border-radius: var(--radius);
+            cursor: pointer;
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.2);
+            transition: all 0.18s ease;
+            letter-spacing: 0.3px;
+        }
+
+        .btn-register:hover {
+            background: var(--moss-light);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 22px rgba(0, 0, 0, 0.25);
+        }
+
+        .btn-register:active {
+            transform: translateY(0);
+        }
+
+        .landing-body {
+            max-width: 640px;
+            margin: 0 auto;
+            padding: 20px 18px 120px;
+        }
+
+        .landing-section {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 20px;
+            margin-bottom: 14px;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+        }
+
+        .landing-section-title {
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--moss);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            border-left: 3px solid var(--moss);
+            padding-left: 7px;
+            margin-bottom: 14px;
+        }
+
+        .landing-section-title.warn {
+            color: var(--rust);
+            border-color: var(--rust);
+        }
+
+        .course-items {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .course-item {
+            display: flex;
+            gap: 11px;
+            align-items: flex-start;
+            font-size: 13px;
+            color: var(--ink-2);
+            line-height: 1.65;
+        }
+
+        .course-item-icon {
+            font-size: 16px;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        .notice-items {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .notice-item {
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+            font-size: 12.5px;
+            color: var(--ink-2);
+            line-height: 1.7;
+        }
+
+        .notice-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--rust);
+            flex-shrink: 0;
+            margin-top: 7px;
+        }
+
+        .notice-dot.green {
+            background: var(--moss);
+        }
+
+        .landing-cta-bottom {
+            background: var(--moss-pale);
+            border: 1px solid #c5d9c0;
+            border-radius: var(--radius);
+            padding: 18px 20px;
+            text-align: center;
+            margin-bottom: 14px;
+        }
+
+        .landing-cta-bottom p {
+            font-size: 13px;
+            color: var(--ink-2);
+            margin-bottom: 14px;
+            line-height: 1.6;
+        }
+
+        .landing-cta-bottom p strong {
+            color: var(--moss);
+        }
+
         /* ══════════════════════════════════════════
    REVIEW SUMMARY (step 3 top)
 ══════════════════════════════════════════ */
@@ -1076,7 +1274,7 @@
     </div>
 
     <!-- ══ STICKY PROGRESS ══ -->
-    <div class="progress-bar">
+    <div class="progress-bar" id="progressBar">
         <div class="progress-inner">
             <div class="step-node active" id="pnode-1">
                 <div class="step-dot" id="pdot-1">1</div>
@@ -1108,11 +1306,9 @@
                 报名成功</div>
             <h2 style="font-size:22px;font-weight:700;color:var(--ink);">感恩您的报名！</h2>
             <div class="success-id" id="successId">-</div>
-            <p style="font-size:13px;color:var(--ink-2);line-height:1.7;margin-top:6px;">确认邮件已发送，我们将透过 WhatsApp
-                通知活动前重要事项。</p>
+            <p style="font-size:13px;color:var(--ink-2);line-height:1.7;margin-top:6px;">确认邮件已发送</p>
             <div style="background:#f5f5f5;border-radius:var(--radius);padding:14px;margin-top:16px;"
-                id="successSummary">
-            </div>
+                id="successSummary"></div>
             <p style="font-size:11px;color:var(--ink-3);margin-top:10px;" id="successTime"></p>
             <div class="success-actions">
                 <button class="btn-outline" onclick="doPrint()">🖨 下载收据</button>
@@ -1120,7 +1316,72 @@
             </div>
         </div>
 
-        <div id="wizardPanels">
+        <!-- ══ LANDING SCREEN (step 0) ══ -->
+        <div class="landing-screen active" id="landingScreen">
+
+            <!-- Hero -->
+            <div class="landing-hero">
+                <img src="web_banner.jpeg" alt="一日禅暨受持八关斋戒">
+                <div class="landing-hero-title">一日禅暨八关斋戒</div>
+                <div class="landing-hero-sub">灵鹫山马来西亚佛学会 · 2026</div>
+                <div class="landing-pills">
+                    <div class="landing-pill">📅 <strong>23.8.2026</strong></div>
+                    <div class="landing-pill">⏰ 上午 <strong>8:30AM</strong></div>
+                    <div class="landing-pill">📍 Bandar Damansara Perdana, PJ</div>
+                    <div class="landing-pill">💰 <strong>RM 50</strong></div>
+                </div>
+            </div>
+
+            <div class="landing-body">
+
+                <!-- 课程内容 -->
+                <div class="landing-section">
+                    <div class="landing-section-title">📿 课程内容</div>
+                    <div class="course-items">
+                        <div class="course-item">
+                            <span class="course-item-icon">🧘</span>
+                            <span>学习让身心放松专注的方法，包括禅修概念、禅坐姿势与方法、以及行禅练习。</span>
+                        </div>
+                        <div class="course-item">
+                            <span class="course-item-icon">☸️</span>
+                            <span>受持八关斋戒 — 以一日一夜的在家出家体验，净化身心，培养正念。</span>
+                        </div>
+                        <div class="course-item">
+                            <span class="course-item-icon">🙏</span>
+                            <span>适合初学者及曾参与灵鹫山禅修的旧学员，欢迎有心修行者共同参与。</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 报名注意事项 -->
+                <div class="landing-section">
+                    <div class="landing-section-title warn">⚠️ 报名注意事项</div>
+                    <div class="notice-items">
+                        <div class="notice-item">
+                            <div class="notice-dot green"></div>
+                            <span>受持八关斋戒需穿着海青，请自行准备。</span>
+                        </div>
+                        <div class="notice-item">
+                            <div class="notice-dot"></div>
+                            <span>凡患有疾病如：严重高血压、糖尿病、心脏病、失眠症、躁郁症、肠胃病等及不能随众作息者，请勿报名。</span>
+                        </div>
+                        <div class="notice-item">
+                            <div class="notice-dot"></div>
+                            <span>若报名者无法出席，恕不退费，感恩您的谅解与配合。</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bottom CTA -->
+                <div class="landing-cta-bottom">
+                    <p>费用：<strong>RM 50.00</strong> · 联络：<strong>012-276 8093</strong></p>
+                    <button class="btn-register" onclick="startRegistration()">我要报名 →</button>
+                </div>
+
+            </div>
+        </div><!-- /landingScreen -->
+
+        <div id="wizardPanels" style="display:none;">
 
             <!-- ═══════════════════════════════
        STEP 1 — 个人资料 + 紧急联络人
@@ -1267,12 +1528,21 @@
                             <div class="err-msg" id="err-emergency_phone"></div>
                         </div>
                     </div>
+
+                </div>
+
+
+                <!-- 劝募人 -->
+                <div class="form-card">
+                    <div class="card-label">劝募人</div>
                     <div class="field" style="margin-bottom:0">
-                        <label for="referrer">劝募人 <span
+                        <label for="referrer">劝募人姓名 <span
                                 style="font-size:11px;color:var(--ink-3);font-weight:400;">（选填）</span></label>
                         <input type="text" id="referrer" placeholder="介绍您来参加的人（若有）">
+                        <div class="field-hint">若您是经亲友、导师或其他参与者介绍报名，请填写介绍人姓名。</div>
                     </div>
                 </div>
+
 
             </div><!-- /step-1 -->
 
@@ -1290,6 +1560,8 @@
                     </div>
                 </div>
 
+
+                <!-- /event info moved to landing page -->
                 <div class="form-card">
                     <div class="card-label">修行背景</div>
 
@@ -1365,6 +1637,60 @@
                             </div>
                         </div>
                         <div class="err-msg" id="err-meditation_exp"></div>
+                        <!-- Conditional: 曾参加过灵鹫山禅修 -->
+                        <div class="cond-block" id="cond-ljs-meditation">
+                            <div class="cond-title">曾参加过灵鹫山禅修经歷（可多选）</div>
+                            <div class="field" style="margin-bottom:0">
+                                <div class="card-options" id="opts-ljs_courses">
+                                    <div class="opt-card" data-group="ljs_courses" data-value="线上或讲堂一日禅"
+                                        onclick="toggleCheck(this)">
+                                        <div class="opt-radio" style="border-radius:4px;"></div>
+                                        <input type="checkbox" value="线上或讲堂一日禅"
+                                            style="position:absolute;opacity:0;pointer-events:none;width:0;height:0;">
+                                        <div class="opt-body">
+                                            <div class="opt-title">线上或讲堂一日禅</div>
+                                        </div>
+                                    </div>
+                                    <div class="opt-card" data-group="ljs_courses" data-value="基础禅三"
+                                        onclick="toggleCheck(this)">
+                                        <div class="opt-radio" style="border-radius:4px;"></div>
+                                        <input type="checkbox" value="基础禅三"
+                                            style="position:absolute;opacity:0;pointer-events:none;width:0;height:0;">
+                                        <div class="opt-body">
+                                            <div class="opt-title">基础禅三</div>
+                                        </div>
+                                    </div>
+                                    <div class="opt-card" data-group="ljs_courses" data-value="初阶禅七"
+                                        onclick="toggleCheck(this)">
+                                        <div class="opt-radio" style="border-radius:4px;"></div>
+                                        <input type="checkbox" value="初阶禅七"
+                                            style="position:absolute;opacity:0;pointer-events:none;width:0;height:0;">
+                                        <div class="opt-body">
+                                            <div class="opt-title">初阶禅七</div>
+                                        </div>
+                                    </div>
+                                    <div class="opt-card" data-group="ljs_courses" data-value="中阶禅七"
+                                        onclick="toggleCheck(this)">
+                                        <div class="opt-radio" style="border-radius:4px;"></div>
+                                        <input type="checkbox" value="中阶禅七"
+                                            style="position:absolute;opacity:0;pointer-events:none;width:0;height:0;">
+                                        <div class="opt-body">
+                                            <div class="opt-title">中阶禅七</div>
+                                        </div>
+                                    </div>
+                                    <div class="opt-card" data-group="ljs_courses" data-value="精进禅廿一"
+                                        onclick="toggleCheck(this)">
+                                        <div class="opt-radio" style="border-radius:4px;"></div>
+                                        <input type="checkbox" value="精进禅廿一"
+                                            style="position:absolute;opacity:0;pointer-events:none;width:0;height:0;">
+                                        <div class="opt-body">
+                                            <div class="opt-title">精进禅廿一</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="err-msg" id="err-ljs_courses"></div>
+                            </div>
+                        </div>
                         <!-- Conditional: 曾在别处 -->
                         <div class="cond-block" id="cond-meditation">
                             <div class="cond-title">请说明禅修背景</div>
@@ -1447,12 +1773,12 @@
                         <div class="card-options row" id="opts-precepts">
                             <div class="opt-card" data-group="precepts" data-value="要" onclick="selectOpt(this)">
                                 <input type="radio" name="precepts" value="要">
-                                <div class="opt-icon">✅</div>
+                                <div class="opt-icon">🙏</div>
                                 <div class="opt-title">要</div>
                             </div>
                             <div class="opt-card" data-group="precepts" data-value="不要" onclick="selectOpt(this)">
                                 <input type="radio" name="precepts" value="不要">
-                                <div class="opt-icon">🔲</div>
+                                <div class="opt-icon">🧘</div>
                                 <div class="opt-title">不要</div>
                             </div>
                         </div>
@@ -1561,8 +1887,18 @@
         };
 
         // ── STATE ──
-        let currentStep = 1;
+        let currentStep = 0;  // 0 = landing
         let receiptFileName = null, receiptFileType = null, currentReceiptData = null;
+
+        function startRegistration() {
+            document.getElementById('landingScreen').classList.remove('active');
+            document.getElementById('wizardPanels').style.display = 'block';
+            document.getElementById('progressBar').classList.remove('hidden');
+            document.getElementById('bottomNav').style.display = 'block';
+            currentStep = 1;
+            showStep(1);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
 
         // ══════════════════════════════════════════════
         // SELECTABLE CARD SYSTEM (no :has())
@@ -1606,10 +1942,36 @@
         }
 
         function onMeditationChange() {
-            const show = rv('meditation_exp') === '曾在别处学过打坐';
+            const med = rv('meditation_exp');
+
+            const showElse = med === '曾在别处学过打坐';
             const b = document.getElementById('cond-meditation');
-            b.classList.toggle('show', show);
-            if (!show) { document.getElementById('meditation_elsewhere').value = ''; clearErr('meditation_elsewhere'); }
+            b.classList.toggle('show', showElse);
+            if (!showElse) { document.getElementById('meditation_elsewhere').value = ''; clearErr('meditation_elsewhere'); }
+
+            const showLjs = med === '曾参加过灵鹫山禅修';
+            const bl = document.getElementById('cond-ljs-meditation');
+            bl.classList.toggle('show', showLjs);
+            if (!showLjs) {
+                document.querySelectorAll('.opt-card[data-group="ljs_courses"]').forEach(c => {
+                    c.classList.remove('selected');
+                    const cb = c.querySelector('input[type=checkbox]');
+                    if (cb) cb.checked = false;
+                });
+                clearErr('ljs_courses');
+            }
+        }
+
+        function toggleCheck(card) {
+            const cb = card.querySelector('input[type=checkbox]');
+            cb.checked = !cb.checked;
+            card.classList.toggle('selected', cb.checked);
+            clearErr('ljs_courses');
+        }
+
+        function rvMulti(group) {
+            return Array.from(document.querySelectorAll(`.opt-card[data-group="${group}"] input[type=checkbox]:checked`))
+                .map(cb => cb.value);
         }
 
         function onTshirtChange() {
@@ -1689,10 +2051,11 @@
             });
         }
 
-        function validateCN(el, errId) {
+        function validateCN(el, errId, label) {
             const val = el.value.trim();
-            if (!val) { showErrEl(el, errId, '请输入姓名（必填）。'); return false; }
-            if (!CN_RE.test(val)) { showErrEl(el, errId, '请输入纯中文姓名。'); return false; }
+            const name = label || '此栏位';
+            if (!val) { showErrEl(el, errId, `请填写${name}（必填）。`); return false; }
+            if (!CN_RE.test(val)) { showErrEl(el, errId, `请输入纯中文（${name}不含英文、数字或符号）。`); return false; }
             clearErrEl(el, errId); return true;
         }
 
@@ -1734,7 +2097,7 @@
             let ok = true;
 
             const cnEl = document.getElementById('chinese_name');
-            if (!validateCN(cnEl, 'err-chinese_name')) ok = false;
+            if (!validateCN(cnEl, 'err-chinese_name', '中文姓名')) ok = false;
 
             if (!rv('gender')) { showErr('gender', '请选择性别。'); ok = false; } else clearErr('gender');
             if (!v('dob')) { showErr('dob', '请选择完整出生日期。'); ok = false; } else clearErr('dob');
@@ -1766,15 +2129,18 @@
             const ref = rv('refuge');
             if (!ref) { showErr('refuge', '请选择皈依资料。'); ok = false; } else clearErr('refuge');
             if (ref === '已皈依') {
-                if (!v('refuge_name').trim()) { showErr('refuge_name', '请填写皈依法名。'); ok = false; } else clearErr('refuge_name');
-                if (!v('refuge_temple').trim()) { showErr('refuge_temple', '请填写皈依寺院。'); ok = false; } else clearErr('refuge_temple');
-                if (!v('refuge_teacher').trim()) { showErr('refuge_teacher', '请填写皈依师长德号。'); ok = false; } else clearErr('refuge_teacher');
+                if (!validateCN(document.getElementById('refuge_name'), 'err-refuge_name', '皈依法名')) ok = false;
+                if (!validateCN(document.getElementById('refuge_temple'), 'err-refuge_temple', '皈依寺院')) ok = false;
+                if (!validateCN(document.getElementById('refuge_teacher'), 'err-refuge_teacher', '皈依师长德号')) ok = false;
             }
 
             const med = rv('meditation_exp');
             if (!med) { showErr('meditation_exp', '请选择禅修经历。'); ok = false; } else clearErr('meditation_exp');
             if (med === '曾在别处学过打坐') {
                 if (!v('meditation_elsewhere').trim()) { showErr('meditation_elsewhere', '请说明曾参与的禅修课程或道场。'); ok = false; } else clearErr('meditation_elsewhere');
+            }
+            if (med === '曾参加过灵鹫山禅修') {
+                if (rvMulti('ljs_courses').length === 0) { showErr('ljs_courses', '请至少选择一项曾参加过的灵鹫山禅修经歷。'); ok = false; } else clearErr('ljs_courses');
             }
 
             const ts = rv('tshirt');
@@ -1815,7 +2181,16 @@
         }
 
         function goBack() {
-            if (currentStep <= 1) return;
+            if (currentStep <= 1) {
+                // Return to landing
+                document.getElementById('wizardPanels').style.display = 'none';
+                document.getElementById('progressBar').classList.add('hidden');
+                document.getElementById('bottomNav').style.display = 'none';
+                document.getElementById('landingScreen').classList.add('active');
+                currentStep = 0;
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                return;
+            }
             currentStep--;
             showStep(currentStep);
             window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -1840,7 +2215,8 @@
             // back/next buttons
             const btnBack = document.getElementById('btnBack');
             const btnNext = document.getElementById('btnNext');
-            btnBack.style.display = n > 1 ? 'block' : 'none';
+            btnBack.style.display = 'block';  // always show; step 1 goes back to landing
+            btnBack.textContent = n === 1 ? '← 返回' : '← 上一步';
             btnNext.textContent = n === 3 ? '✓ 提交报名' : '下一步 →';
         }
 
@@ -1856,12 +2232,16 @@
             const refugeFull = refugeVal === '已皈依'
                 ? `已皈依 · 法名：${v('refuge_name')}` : refugeVal;
 
+            const medVal = rv('meditation_exp');
+            const medFull = medVal === '曾参加过灵鹫山禅修' && rvMulti('ljs_courses').length
+                ? `${medVal}（${rvMulti('ljs_courses').join('、')}）` : medVal;
+
             const rows = [
                 ['姓名', v('chinese_name') + ' · ' + rv('gender')],
                 ['手机', v('phone')],
                 ['邮箱', v('email')],
                 ['皈依', refugeFull],
-                ['禅修经历', rv('meditation_exp')],
+                ['禅修经历', medFull],
                 ['禅T', tshirtFull],
                 ['八关斋戒', rv('precepts')],
                 ['海青', rv('haiqing')],
@@ -1941,6 +2321,7 @@
                 refuge_teacher: refugeVal === '已皈依' ? v('refuge_teacher') : '',
                 meditation_exp: medVal,
                 meditation_elsewhere: medVal === '曾在别处学过打坐' ? v('meditation_elsewhere') : '',
+                ljs_courses: medVal === '曾参加过灵鹫山禅修' ? rvMulti('ljs_courses').join('、') : '',
                 tshirt: tshirtVal,
                 tshirt_size: tshirtVal === '我需要禅T' ? rv('tshirt_size') : '',
                 precepts: rv('precepts'),
@@ -2003,7 +2384,9 @@
                 : refugeVal;
             const medVal = rv('meditation_exp');
             const medDisplay = medVal === '曾在别处学过打坐' && v('meditation_elsewhere')
-                ? `${medVal}（${v('meditation_elsewhere')}）` : medVal;
+                ? `${medVal}（${v('meditation_elsewhere')}）`
+                : (medVal === '曾参加过灵鹫山禅修' && rvMulti('ljs_courses').length
+                    ? `${medVal}（${rvMulti('ljs_courses').join('、')}）` : medVal);
 
             document.getElementById('printReceipt').innerHTML = `
     <div class="pr-header">
@@ -2032,8 +2415,15 @@
 
         // ── INIT ──
         document.addEventListener('DOMContentLoaded', () => {
+            // Hide progress bar and bottom nav on landing
+            document.getElementById('progressBar').classList.add('hidden');
+            document.getElementById('bottomNav').style.display = 'none';
+            // Chinese name validators
             attachCN('chinese_name', 'err-chinese_name');
             attachCN('emergency_name', 'err-emergency_name');
+            attachCN('refuge_name', 'err-refuge_name');
+            attachCN('refuge_temple', 'err-refuge_temple');
+            attachCN('refuge_teacher', 'err-refuge_teacher');
         });
     </script>
 </body>
