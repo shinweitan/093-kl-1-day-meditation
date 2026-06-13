@@ -27,17 +27,23 @@
 
         /* ── TOKENS ── */
         :root {
-            --moss: #3d5a38;
-            --moss-mid: #4e7248;
-            --moss-light: #eef3ec;
-            --moss-pale: #f6f9f5;
-            --rust: #b94a1c;
-            --gold: #c8940a;
-            --ink: #1a1a1a;
-            --ink-2: #4a4a4a;
-            --ink-3: #8a8a8a;
-            --paper: #faf8f4;
-            --border: #ddd9d0;
+            --moss: #2e5220;
+            /* olive-forest */
+            --moss: #5c9450;
+            --moss: #5a8c54;
+            /* celadon-inspired, gentle */
+            --moss: #3a6b35;
+            /* lighter, more sage-green */
+            --moss-mid: #4e8048;
+            --moss-light: #e2eed e;
+            --moss-pale: #f0f6ee;
+            --paper: #faf7ef;
+            /* near-white warm paper */
+            --rust: #c05020;
+            --ink: #1e2a1c;
+            --ink-2: #404e3e;
+            --ink-3: #88968 6;
+            --border: #d0ccbf;
             --success: #2d6a2a;
             --error: #c0392b;
             --radius: 10px;
@@ -52,7 +58,9 @@
             background: var(--paper);
             color: var(--ink);
             min-height: 100vh;
-            line-height: 1.65;
+            line-height: 1.7;
+            font-size: 15px;
+            /* base font up from implicit 14px */
         }
 
         /* ══════════════════════════════════════════
@@ -95,7 +103,7 @@
 
         .banner-title {
             font-family: var(--serif);
-            font-size: 13px;
+            font-size: 14.5px;
             font-weight: 600;
             color: #fff;
             white-space: nowrap;
@@ -291,7 +299,7 @@
 
         .step-heading h2 {
             font-family: var(--serif);
-            font-size: 17px;
+            font-size: 19px;
             font-weight: 600;
             color: var(--ink);
             line-height: 1.3;
@@ -375,7 +383,7 @@
             border-radius: var(--radius-sm);
             background: #fff;
             font-family: var(--font);
-            font-size: 14px;
+            font-size: 15px;
             color: var(--ink);
             transition: border-color var(--tr), box-shadow var(--tr);
             outline: none;
@@ -571,14 +579,14 @@
         }
 
         .opt-title {
-            font-size: 13px;
+            font-size: 14px;
             font-weight: 600;
             color: var(--ink);
             line-height: 1.3;
         }
 
         .opt-desc {
-            font-size: 11px;
+            font-size: 12px;
             color: var(--ink-3);
             margin-top: 2px;
         }
@@ -857,7 +865,7 @@
 
         .landing-hero-title {
             font-family: var(--serif);
-            font-size: 22px;
+            font-size: 24px;
             font-weight: 700;
             color: #fff;
             line-height: 1.35;
