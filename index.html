@@ -931,6 +931,26 @@
             transform: translateY(0);
         }
 
+        .btn-register:disabled {
+            background: #e5e5e5;
+            color: #999;
+            cursor: not-allowed;
+            box-shadow: none;
+            transform: none;
+        }
+
+        .closed-banner {
+            background: #fdecea;
+            border: 1px solid #f0b8b0;
+            color: #c0392b;
+            border-radius: var(--radius-sm);
+            padding: 11px 14px;
+            margin-bottom: 12px;
+            font-size: 13px;
+            font-weight: 600;
+            text-align: center;
+        }
+
         .landing-body {
             max-width: 640px;
             margin: 0 auto;
@@ -1277,6 +1297,7 @@
                 <div class="info-item">⏰ 上午 <strong>8:30AM</strong></div>
                 <div class="info-item">📍 Bandar Damansara Perdana, PJ</div>
                 <div class="info-item">📞 <strong>012-276 8093</strong></div>
+                <div class="info-item">🗓️ 截止 <strong>17.8.2026</strong></div>
             </div>
         </div>
     </div>
@@ -1337,6 +1358,7 @@
                     <div class="landing-pill">⏰ 上午 <strong>8:30AM</strong></div>
                     <div class="landing-pill">📍 Bandar Damansara Perdana, PJ</div>
                     <div class="landing-pill">💰 <strong>RM 50</strong></div>
+                    <div class="landing-pill">🗓️ 报名截止 <strong>17.8.2026</strong></div>
                 </div>
             </div>
 
@@ -1377,13 +1399,17 @@
                             <div class="notice-dot"></div>
                             <span>若报名者无法出席，恕不退费，感恩您的谅解与配合。</span>
                         </div>
+                        <div class="notice-item">
+                            <div class="notice-dot"></div>
+                            <span>报名截止日期：<strong>2026年8月17日</strong>，额满或截止后系统将自动关闭报名。</span>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Bottom CTA -->
-                <div class="landing-cta-bottom">
-                    <p>费用：<strong>RM 50.00</strong> · 联络：<strong>012-276 8093</strong></p>
-                    <button class="btn-register" onclick="startRegistration()">我要报名 →</button>
+                <div class="landing-cta-bottom" id="landingCtaBottom">
+                    <p>费用：<strong>RM 50.00</strong> · 截止日期：<strong>17.8.2026</strong> · 联络：<strong>012-276 8093</strong></p>
+                    <button class="btn-register" id="btnRegister" onclick="startRegistration()">我要报名 →</button>
                 </div>
 
             </div>
@@ -1889,6 +1915,7 @@
             eventName: '一日禅暨八关斋戒 2026',
             organiser: '灵鹫山马来西亚佛学会',
             eventDate: '2026年8月23日',
+            registrationDeadlineDisplay: '2026年8月17日',
             feeDisplay: 'RM 50.00',
             contactPhone: '012-276 8093',
             receiptMaxMB: 10,
@@ -1897,8 +1924,54 @@
         // ── STATE ──
         let currentStep = 0;  // 0 = landing
         let receiptFileName = null, receiptFileType = null, currentReceiptData = null;
+        let registrationClosed = false;
+        let closedReason = '';   // 'expired' | 'full'
+
+        // ══════════════════════════════════════════════
+        // AVAILABILITY CHECK (deadline + capacity)
+        // ══════════════════════════════════════════════
+        async function checkRegistrationStatus() {
+            try {
+                const resp = await fetch(CONFIG.apiEndpoint, { method: 'GET' });
+                const data = await resp.json();
+                if (data.expired) {
+                    registrationClosed = true;
+                    closedReason = 'expired';
+                } else if (data.full) {
+                    registrationClosed = true;
+                    closedReason = 'full';
+                }
+                if (registrationClosed) showClosedNotice();
+            } catch (err) {
+                // If the check fails (e.g. offline), fail open — the server
+                // will still enforce the deadline/capacity on submit.
+                console.error('Status check failed:', err);
+            }
+        }
+
+        function showClosedNotice() {
+            const btn = document.getElementById('btnRegister');
+            const cta = document.getElementById('landingCtaBottom');
+            if (!btn || !cta) return;
+
+            const msg = closedReason === 'expired'
+                ? `⏰ 报名已于 ${CONFIG.registrationDeadlineDisplay} 截止，感谢您的关注。`
+                : '🈵 报名名额已满，感谢您的关注。';
+
+            btn.disabled = true;
+            btn.textContent = closedReason === 'expired' ? '报名已截止' : '名额已满';
+
+            if (!document.getElementById('closedBannerNotice')) {
+                const notice = document.createElement('div');
+                notice.id = 'closedBannerNotice';
+                notice.className = 'closed-banner';
+                notice.textContent = msg;
+                cta.insertBefore(notice, cta.firstChild);
+            }
+        }
 
         function startRegistration() {
+            if (registrationClosed) { showClosedNotice(); return; }
             document.getElementById('landingScreen').classList.remove('active');
             document.getElementById('wizardPanels').style.display = 'block';
             document.getElementById('progressBar').classList.remove('hidden');
@@ -2351,7 +2424,14 @@
                     showSuccess(data);
                 } else {
                     btn.disabled = false;
-                    alert('提交失败，请稍后再试。\n' + (data.message || JSON.stringify(data)));
+                    let msg = data.message || JSON.stringify(data);
+                    if (data.expired) msg = `⏰ ${msg}`;
+                    else if (data.full) msg = `🈵 ${msg}`;
+                    alert('提交失败，请稍后再试。\n' + msg);
+                    if (data.expired || data.full) {
+                        registrationClosed = true;
+                        closedReason = data.expired ? 'expired' : 'full';
+                    }
                 }
             } catch (err) {
                 document.getElementById('loadingOverlay').classList.remove('show');
@@ -2432,6 +2512,8 @@
             attachCN('refuge_name', 'err-refuge_name');
             attachCN('refuge_temple', 'err-refuge_temple');
             attachCN('refuge_teacher', 'err-refuge_teacher');
+            // Check deadline/capacity so the register button reflects reality
+            checkRegistrationStatus();
         });
     </script>
 </body>
